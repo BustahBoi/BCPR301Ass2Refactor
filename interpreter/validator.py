@@ -16,13 +16,13 @@ class Validator:
 
     def check(self, attr, data):
         check_attr = getattr(self, attr.lower(), False)
+        data = str(data)
         if check_attr:
             match = re.match(check_attr, data)
             if match:
                 return data
             else:
-                data = False
-                return data
+                return False
 
     def check_gender(self, new_gender):
         """
@@ -50,25 +50,6 @@ class Validator:
             new_gender = False
             # print("false new_gender")
             return new_gender
-
-    def check_age(self, new_age):
-        """
-        Checks the age matches validation rules
-        :param new_age:
-        :return:
-        # Wesley
-        >>> v = Validator()
-        >>> v.check_age("24")
-        '24'
-        """
-        new_age = str(new_age)
-        match = re.match(self.age, new_age)
-        if match:
-            return new_age
-        else:
-            new_age = False
-            # print("false new_age")
-            return new_age
 
     def check_sales(self, new_sales):
         """
@@ -165,11 +146,11 @@ class Validator:
                 except TypeError:
                     print("TypeError")
             elif key == "Age":
-                if value is None or a.check_age(value) is False:
+                if value is None or a.check("Age", value) is False:
                     result = False
                     return result
                 else:
-                    a.push_value(key, a.check_age(value))
+                    a.push_value(key, a.check("Age", value))
             elif key == "Sales":
                 if value is None or a.check_sales(value) is False:
                     result = False
