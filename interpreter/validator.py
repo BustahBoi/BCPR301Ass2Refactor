@@ -6,7 +6,7 @@ class Validator:
     def __init__(self):
         self.temp_dict = dict()
         self.valid_dict = dict()
-        self.empid = "^[A-Z][\d]{3}$"
+        self.id = "^[A-Z][\d]{3}$"
         self.gender = "^(M|F)$"
         self.age = "^[\d]{2}$"
         self.sales = "^[\d]{3}$"
@@ -14,23 +14,15 @@ class Validator:
         self.salary = "^([\d]{2}|[\d]{3})$"
         self.birthday = "^(0[1-9]|[1-2][0-9]|3(0|1))(-|/)(0[1-9]|1[0-2])(-|/)(19|20)[0-9]{2}$"
 
-    def check_empid(self, new_empid):
-        """
-        Checks the empid matches validation rules
-        :param new_empid:
-        :return:
-        # Wesley
-        >>> v = Validator()
-        >>> v.check_empid("A123")
-        'A123'
-        """
-        match = re.match(self.empid, new_empid)
-        if match:
-            return new_empid
-        else:
-            new_empid = False
-            # print("false id")
-            return new_empid
+    def check(self, attr, data):
+        check_attr = getattr(self, attr.lower(), False)
+        if check_attr:
+            match = re.match(check_attr, data)
+            if match:
+                return data
+            else:
+                data = False
+                return data
 
     def check_gender(self, new_gender):
         """
@@ -156,11 +148,11 @@ class Validator:
         for key, value in row.items():
             if key == "ID":
                 try:
-                    if value is None or a.check_empid(value) is False:
+                    if value is None or a.check("ID", value) is False:
                         result = False
                         return result
                     else:
-                        a.push_value(key, a.check_empid(value))
+                        a.push_value(key, a.check("ID", value))
                 except TypeError:
                     print("TypeError")
             elif key == "Gender":
