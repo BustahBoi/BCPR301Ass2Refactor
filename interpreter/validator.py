@@ -10,7 +10,7 @@ class Validator:
         self.gender = "^(M|F)$"
         self.age = "^[\d]{2}$"
         self.sales = "^[\d]{3}$"
-        self.BMI = "^(Normal|Overweight|Obesity|Underweight)$"
+        self.bmi = "^(Normal|Overweight|Obesity|Underweight)$"
         self.salary = "^([\d]{2}|[\d]{3})$"
         self.birthday = "^(0[1-9]|[1-2][0-9]|3(0|1))(-|/)(0[1-9]|1[0-2])(-|/)(19|20)[0-9]{2}$"
 
@@ -61,9 +61,9 @@ class Validator:
         >>> v.check_BMI("normal")
         'Normal'
         """
-        match = re.match(self.BMI, new_BMI)
-        if match:
-            return new_BMI
+        checked = self.check("BMI", new_BMI)
+        if checked:
+            return checked
         else:
             # James (new reg ex)
             match = re.match("^(normal|overweight|obesity|underweight)$", new_BMI)
