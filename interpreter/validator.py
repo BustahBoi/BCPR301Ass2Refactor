@@ -79,9 +79,9 @@ class Validator:
         return a_date.date().strftime("%d-%m-%Y")
 
     def check_birthday(self, new_birthday):
-        match = re.match(self.birthday, new_birthday)
-        if match:
-                return new_birthday
+        checked = self.check("Birthday", new_birthday)
+        if checked:
+            return checked
         else:
             invalid_delims = "(/|\\|.|:|;|,|_)"
             match = re.search(invalid_delims, new_birthday)
