@@ -34,9 +34,9 @@ class Validator:
         >>> v.check_gender("M")
         'M'
         """
-        match = re.match(self.gender, new_gender)
-        if match:
-            return new_gender
+        checked = self.check("Gender", new_gender)
+        if checked:
+            return checked
         else:
             # James (new reg ex)
             match = re.match("^((m|M)ale)$", new_gender)
