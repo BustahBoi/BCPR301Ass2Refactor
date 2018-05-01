@@ -74,16 +74,6 @@ class Validator:
             # print("false new_BMI")
             return new_BMI
 
-    def check_salary(self, new_salary):
-        new_salary = str(new_salary)
-        match = re.match(self.salary, new_salary)
-        if match:
-            return new_salary
-        else:
-            new_salary = False
-            # print("false new_salary")
-            return new_salary
-
     @staticmethod
     def xlsx_date(a_date):
         return a_date.date().strftime("%d-%m-%Y")
@@ -145,11 +135,11 @@ class Validator:
                 else:
                     a.push_value(key, a.check_BMI(value))
             elif key == "Salary":
-                if value is None or a.check_salary(value) is False:
+                if value is None or a.check("Salary", value) is False:
                     result = False
                     return result
                 else:
-                    a.push_value(key, a.check_salary(value))
+                    a.push_value(key, a.check("Salary", value))
             elif key == "Birthday":
                 if value is None or a.check_birthday(value) is False:
                     result = False
