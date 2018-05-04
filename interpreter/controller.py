@@ -14,15 +14,6 @@ class Controller:
         self.filehandler = None
         self.graph = None
 
-    def set_remote(self, host, user, password, db):
-        """
-        Set the remote database
-        :param host, user, password, db:
-        :return:
-        """
-        self.db_handler.set_remote(host, user, password, db)
-        self.db_handler.insert_remote_dict(self.data)
-
     def set_graph(self, graph_type, filename):
         self.graph = Graph()
         data = self.data

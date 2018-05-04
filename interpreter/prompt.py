@@ -49,6 +49,10 @@ class Shell(Cmd):
             return True
         return False
 
+    def set_remote(self, host, user, password, db):
+        self.db_handler.set_remote(host, user, password, db)
+        self.db_handler.insert_remote_dict(self.data)
+
     # Wesley
     def do_cd(self, arg):
         """
@@ -124,7 +128,7 @@ class Shell(Cmd):
                     user = input("What is the username? >")
                     password = input("Input a password >")
                     db = input("What is the database name? >")
-                    self.controller.set_remote(host, user, password, db)
+                    self.set_remote(host, user, password, db)
                     self.controller.get_remote()
                     if self.check_data():
                         print("Data has been loaded")
