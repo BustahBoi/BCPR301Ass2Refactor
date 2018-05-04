@@ -23,14 +23,6 @@ class Shell(Cmd):
         self.file = None
         self.directory = path.realpath(path.curdir)
 
-    def validate(self):
-        result = self.filehandler.read()
-        self.data = result
-
-    def set_local(self, connection):
-        self.db_handler.set_local(connection)
-        self.db_handler.insert_local_dict(self.data)
-
     def get_local(self):
         self.data = self.db_handler.get_local()
 
@@ -109,7 +101,7 @@ class Shell(Cmd):
                     self.file = path.realpath(path.join(self.directory, path.relpath(arg)))
                     self.filehandler.load(self.file)
                     self.prompt = '(Interpreter: ' + path.basename(self.file) + ') '
-                    self.validate()
+                    self.data = self.filehandler.read()
                 else:
                     print("Path is not a file")
             except ValueError:
@@ -121,7 +113,8 @@ class Shell(Cmd):
             try:
                 if db.lower() == "local":
                     db_name = input("What is the name of the database? >")
-                    self.set_local(db_name)
+                    self.db_handler.set_local(db_name)
+                    self.db_handler.insert_local_dict(self.data)
                     self.get_local()
                     if self.check_data():
                         print("Data has been loaded")
@@ -240,7 +233,8 @@ class Shell(Cmd):
             try:
                 if commands[0].lower() == "local":
                     db_name = input("What would you like to name the database? >")
-                    self.set_local(db_name)
+                    self.db_handler.set_local(db_name)
+                    self.db_handler.insert_local_dict(self.data)
                 elif commands[0].lower() == "remote":
                     host = input("What is the hostname? >")
                     user = input("What is the username? >")
