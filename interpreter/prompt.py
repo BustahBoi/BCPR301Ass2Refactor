@@ -37,6 +37,10 @@ class Shell(Cmd):
         result = self.filehandler.read()
         self.data = result
 
+    def set_local(self, connection):
+        self.db_handler.set_local(connection)
+        self.db_handler.insert_local_dict(self.data)
+
     # Wesley
     def do_cd(self, arg):
         """
@@ -87,7 +91,7 @@ class Shell(Cmd):
                     result = self.load(self.file)
                     if result:
                         self.prompt = '(Interpreter: ' + path.basename(self.file) + ') '
-                        self.controller.validate()
+                        self.validate()
                     else:
                         print("File does not exist")  # pragma: no cover
                 else:
@@ -101,7 +105,7 @@ class Shell(Cmd):
             try:
                 if db.lower() == "local":
                     db_name = input("What is the name of the database? >")
-                    self.controller.set_local(db_name)
+                    self.set_local(db_name)
                     self.controller.get_local()
                     if self.controller.check_data():
                         print("Data has been loaded")

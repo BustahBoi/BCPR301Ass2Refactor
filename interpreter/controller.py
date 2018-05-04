@@ -14,15 +14,6 @@ class Controller:
         self.filehandler = None
         self.graph = None
 
-    def set_local(self, connection):
-        """
-        Set the local database with a specified name
-        :param connection:
-        :return:
-        """
-        self.db_handler.set_local(connection)
-        self.db_handler.insert_local_dict(self.data)
-
     def set_remote(self, host, user, password, db):
         """
         Set the remote database
