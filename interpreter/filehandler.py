@@ -10,19 +10,13 @@ from interpreter import validator
 # James
 class FileHandler:
     # James
-    def __init__(self, file_name):
-        self.filename = file_name
+    def __init__(self):
+        self.filename = None
         self.file_type = None
 
-    # James
-    # @staticmethod
-    # def get_file_name():
-    #     cwd = './Saves/'
-    #     for file in Path(cwd).iterdir():
-    #         print(file)
-    #     file = input("Which file do you wish to load? >>> ")
-    #     filename = Path(cwd+file)
-    #     return filename
+    def load(self, filename):
+        self.filename = filename
+        self.set_file_type()
 
     # James
     def file_exist(self):

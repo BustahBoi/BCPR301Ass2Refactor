@@ -16,20 +16,12 @@ class Shell(Cmd):
         super().__init__()
         self.db_handler = DatabaseHandler()
         self.data = None
-        self.filehandler = None
+        self.filehandler = FileHandler()
         self.graph = None
         self.intro = "Welcome to our custom Interpreter shell. Type help or ? to list commands.\n"
         self.prompt = '(Interpreter) '
         self.file = None
         self.directory = path.realpath(path.curdir)
-
-    def load(self, filename):
-        if path.exists(filename):
-            self.filehandler = FileHandler(filename)
-            self.filehandler.set_file_type()
-            return True
-        else:
-            return False  # pragma: no cover
 
     def validate(self):
         result = self.filehandler.read()
@@ -115,12 +107,9 @@ class Shell(Cmd):
             try:
                 if path.isfile(path.realpath(path.join(self.directory, path.relpath(arg)))):
                     self.file = path.realpath(path.join(self.directory, path.relpath(arg)))
-                    result = self.load(self.file)
-                    if result:
-                        self.prompt = '(Interpreter: ' + path.basename(self.file) + ') '
-                        self.validate()
-                    else:
-                        print("File does not exist")  # pragma: no cover
+                    self.filehandler.load(self.file)
+                    self.prompt = '(Interpreter: ' + path.basename(self.file) + ') '
+                    self.validate()
                 else:
                     print("Path is not a file")
             except ValueError:
