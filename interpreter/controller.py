@@ -14,9 +14,6 @@ class Controller:
         self.filehandler = None
         self.graph = None
 
-    def set_keys(self, key_1, key_2=None):
-        self.graph.set_keys(key_1, key_2)
-
     def draw(self, x, y, title):
         self.graph.draw(x, y, title)
 

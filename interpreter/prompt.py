@@ -64,6 +64,9 @@ class Shell(Cmd):
     def set_criteria(self, criteria_1, criteria_2=None):
         self.graph.set_criteria(criteria_1, criteria_2)
 
+    def set_keys(self, key_1, key_2=None):
+        self.graph.set_keys(key_1, key_2)
+
     # Wesley
     def do_cd(self, arg):
         """
@@ -186,9 +189,9 @@ class Shell(Cmd):
                     keys = input("What keys to use? ([key1] [key2]) > ")
                     a_key = keys.split(" ")
                     if len(a_key) > 1:
-                        self.controller.set_keys(a_key[0], a_key[1])
+                        self.set_keys(a_key[0], a_key[1])
                     else:
-                        self.controller.set_keys(a_key[0])
+                        self.set_keys(a_key[0])
                     title = input("What is the title? >")
                     if len(a_key) > 1:
                         self.controller.draw(a_key[0], a_key[1], title)
