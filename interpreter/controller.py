@@ -19,9 +19,6 @@ class Controller:
         data = self.data
         self.graph.set_data(data, graph_type, filename)
 
-    def get_remote(self):
-        self.data = self.db_handler.get_remote()
-
     def set_criteria(self, criteria_1, criteria_2=None):
         self.graph.set_criteria(criteria_1, criteria_2)
 

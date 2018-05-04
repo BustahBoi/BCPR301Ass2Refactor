@@ -53,6 +53,9 @@ class Shell(Cmd):
         self.db_handler.set_remote(host, user, password, db)
         self.db_handler.insert_remote_dict(self.data)
 
+    def get_remote(self):
+        self.data = self.db_handler.get_remote()
+
     # Wesley
     def do_cd(self, arg):
         """
@@ -129,7 +132,7 @@ class Shell(Cmd):
                     password = input("Input a password >")
                     db = input("What is the database name? >")
                     self.set_remote(host, user, password, db)
-                    self.controller.get_remote()
+                    self.get_remote()
                     if self.check_data():
                         print("Data has been loaded")
                     else:
@@ -159,7 +162,7 @@ class Shell(Cmd):
         """
         commands = arg.split(" ")
         # James exception handling
-        if self.controller.check_data():
+        if self.check_data():
             try:
                 if commands[0] == "pie" or commands[0] == "scatter" or commands[0] == "bar":
                     a_path = path.join(self.directory, commands[1] + ".html")
