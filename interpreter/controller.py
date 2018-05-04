@@ -28,9 +28,6 @@ class Controller:
         data = self.data
         self.graph.set_data(data, graph_type, filename)
 
-    def get_local(self):
-        self.data = self.db_handler.get_local()
-
     def get_remote(self):
         self.data = self.db_handler.get_remote()
 

@@ -41,6 +41,9 @@ class Shell(Cmd):
         self.db_handler.set_local(connection)
         self.db_handler.insert_local_dict(self.data)
 
+    def get_local(self):
+        self.data = self.db_handler.get_local()
+
     # Wesley
     def do_cd(self, arg):
         """
@@ -106,7 +109,7 @@ class Shell(Cmd):
                 if db.lower() == "local":
                     db_name = input("What is the name of the database? >")
                     self.set_local(db_name)
-                    self.controller.get_local()
+                    self.get_local()
                     if self.controller.check_data():
                         print("Data has been loaded")
                     else:
