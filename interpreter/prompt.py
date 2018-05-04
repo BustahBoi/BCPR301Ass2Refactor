@@ -23,9 +23,6 @@ class Shell(Cmd):
         self.file = None
         self.directory = path.realpath(path.curdir)
 
-    def get_local(self):
-        self.data = self.db_handler.get_local()
-
     def check_data(self):
         if self.data is not None:
             return True
@@ -115,7 +112,7 @@ class Shell(Cmd):
                     db_name = input("What is the name of the database? >")
                     self.db_handler.set_local(db_name)
                     self.db_handler.insert_local_dict(self.data)
-                    self.get_local()
+                    self.db_handler.get_local()
                     if self.check_data():
                         print("Data has been loaded")
                     else:
