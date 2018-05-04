@@ -18,9 +18,6 @@ class Shell(Cmd):
         self.file = None
         self.directory = path.realpath(path.curdir)
 
-    def get_remote(self):
-        self.data = self.db_handler.get_remote()
-
     def set_graph(self, graph_type, filename):
         self.graph = Graph()
         data = self.data
@@ -106,7 +103,7 @@ class Shell(Cmd):
                     db = input("What is the database name? >")
                     self.db_handler.set_remote(host, user, password, db)
                     self.db_handler.insert_remote_dict(self.data)
-                    self.get_remote()
+                    self.data = self.db_handler.get_remote()
                     if self.data:
                         print("Data has been loaded")
                     else:
