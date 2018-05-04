@@ -25,6 +25,14 @@ class Shell(Cmd):
         self.file = None
         self.directory = path.realpath(path.curdir)
 
+    def load(self, filename):
+        if path.exists(filename):
+            self.filehandler = FileHandler(filename)
+            self.filehandler.set_file_type()
+            return True
+        else:
+            return False  # pragma: no cover
+
     # Wesley
     def do_cd(self, arg):
         """
@@ -72,7 +80,7 @@ class Shell(Cmd):
             try:
                 if path.isfile(path.realpath(path.join(self.directory, path.relpath(arg)))):
                     self.file = path.realpath(path.join(self.directory, path.relpath(arg)))
-                    result = self.controller.load(self.file)
+                    result = self.load(self.file)
                     if result:
                         self.prompt = '(Interpreter: ' + path.basename(self.file) + ') '
                         self.controller.validate()
