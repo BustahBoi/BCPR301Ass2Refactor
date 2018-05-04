@@ -119,7 +119,7 @@ class Graph:
         self.graph_type = types[a_type]
 
     # Wesley
-    def set_criteria(self, criteria_1, criteria_2):
+    def set_criteria(self, criteria_1, criteria_2=None):
         self.graph_type.set_criteria(criteria_1, criteria_2)
 
     # Wesley

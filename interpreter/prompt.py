@@ -18,9 +18,6 @@ class Shell(Cmd):
         self.file = None
         self.directory = path.realpath(path.curdir)
 
-    def set_criteria(self, criteria_1, criteria_2=None):
-        self.graph.set_criteria(criteria_1, criteria_2)
-
     def set_keys(self, key_1, key_2=None):
         self.graph.set_keys(key_1, key_2)
 
@@ -137,9 +134,9 @@ class Shell(Cmd):
                     print("_______________")
                     print(criteria)
                     if len(crit) > 1:
-                        self.set_criteria(crit[0], crit[1])
+                        self.graph.set_criteria(crit[0], crit[1])
                     else:
-                        self.set_criteria(crit[0])
+                        self.graph.set_criteria(crit[0])
                     keys = input("What keys to use? ([key1] [key2]) > ")
                     a_key = keys.split(" ")
                     if len(a_key) > 1:
