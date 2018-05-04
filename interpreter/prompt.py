@@ -61,6 +61,9 @@ class Shell(Cmd):
         data = self.data
         self.graph.set_data(data, graph_type, filename)
 
+    def set_criteria(self, criteria_1, criteria_2=None):
+        self.graph.set_criteria(criteria_1, criteria_2)
+
     # Wesley
     def do_cd(self, arg):
         """
@@ -177,9 +180,9 @@ class Shell(Cmd):
                     print("_______________")
                     print(criteria)
                     if len(crit) > 1:
-                        self.controller.set_criteria(crit[0], crit[1])
+                        self.set_criteria(crit[0], crit[1])
                     else:
-                        self.controller.set_criteria(crit[0])
+                        self.set_criteria(crit[0])
                     keys = input("What keys to use? ([key1] [key2]) > ")
                     a_key = keys.split(" ")
                     if len(a_key) > 1:

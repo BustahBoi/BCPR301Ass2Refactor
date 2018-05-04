@@ -14,9 +14,6 @@ class Controller:
         self.filehandler = None
         self.graph = None
 
-    def set_criteria(self, criteria_1, criteria_2=None):
-        self.graph.set_criteria(criteria_1, criteria_2)
-
     def set_keys(self, key_1, key_2=None):
         self.graph.set_keys(key_1, key_2)
 
