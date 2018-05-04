@@ -5,13 +5,8 @@ from interpreter.chart import Graph
 from os import path
 
 
-# James
 class Shell(Cmd):
-    # This will replace the init stuff, all of it will be set in the parent class, access
-    # these values using self.intro, self.prompt etc
 
-    # if the init is defined then super must be used and each item attached to the object, may be better approach
-    # because it is more explicit
     def __init__(self):
         super().__init__()
         self.db_handler = DatabaseHandler()
@@ -79,7 +74,6 @@ class Shell(Cmd):
         except TypeError:    # pragma: no cover
             print("Type of none is invalid")  # pragma: no cover
 
-    # James
     def do_load(self, arg):
         """
         Syntax:
@@ -91,7 +85,6 @@ class Shell(Cmd):
         :return:
             File has been set
         """
-        # choice = input("From file or database?")
         if arg.lower() != "database":
             try:
                 if path.isfile(path.realpath(path.join(self.directory, path.relpath(arg)))):
@@ -104,9 +97,7 @@ class Shell(Cmd):
             except ValueError:
                 print("No path was specified, please try again")
         elif arg.lower() == "database":
-            # print("eh")
             db = input("remote or local?")
-            # if self.controller.check_data():
             try:
                 if db.lower() == "local":
                     db_name = input("What is the name of the database? >")
@@ -137,7 +128,6 @@ class Shell(Cmd):
         else:
             print("Invalid command")
 
-    # Wesley
     def do_graph(self, arg):
         """
         Syntax:
@@ -152,7 +142,6 @@ class Shell(Cmd):
             The graph
         """
         commands = arg.split(" ")
-        # James exception handling
         if self.check_data():
             try:
                 if commands[0] == "pie" or commands[0] == "scatter" or commands[0] == "bar":
@@ -187,7 +176,6 @@ class Shell(Cmd):
         else:
             print("Please set data before attempting to create a graph")
 
-    # James
     def do_quit(self, arg):
         """
         Syntax:
