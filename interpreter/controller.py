@@ -40,11 +40,6 @@ class Controller:
     def draw(self, x, y, title):
         self.graph.draw(x, y, title)
 
-    def check_data(self):
-        if self.data is not None:
-            return True
-        return False
-
 
 # Controller shouldn't run doctests???
 # if __name__ == "__main__":

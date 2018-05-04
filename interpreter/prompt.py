@@ -44,6 +44,11 @@ class Shell(Cmd):
     def get_local(self):
         self.data = self.db_handler.get_local()
 
+    def check_data(self):
+        if self.data is not None:
+            return True
+        return False
+
     # Wesley
     def do_cd(self, arg):
         """
@@ -110,7 +115,7 @@ class Shell(Cmd):
                     db_name = input("What is the name of the database? >")
                     self.set_local(db_name)
                     self.get_local()
-                    if self.controller.check_data():
+                    if self.check_data():
                         print("Data has been loaded")
                     else:
                         print("No data was found")
@@ -121,7 +126,7 @@ class Shell(Cmd):
                     db = input("What is the database name? >")
                     self.controller.set_remote(host, user, password, db)
                     self.controller.get_remote()
-                    if self.controller.check_data():
+                    if self.check_data():
                         print("Data has been loaded")
                     else:
                         print("No data was found")
