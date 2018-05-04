@@ -18,9 +18,6 @@ class Shell(Cmd):
         self.file = None
         self.directory = path.realpath(path.curdir)
 
-    def set_keys(self, key_1, key_2=None):
-        self.graph.set_keys(key_1, key_2)
-
     def draw(self, x, y, title):
         self.graph.draw(x, y, title)
 
@@ -140,9 +137,9 @@ class Shell(Cmd):
                     keys = input("What keys to use? ([key1] [key2]) > ")
                     a_key = keys.split(" ")
                     if len(a_key) > 1:
-                        self.set_keys(a_key[0], a_key[1])
+                        self.graph.set_keys(a_key[0], a_key[1])
                     else:
-                        self.set_keys(a_key[0])
+                        self.graph.set_keys(a_key[0])
                     title = input("What is the title? >")
                     if len(a_key) > 1:
                         self.draw(a_key[0], a_key[1], title)

@@ -36,13 +36,13 @@ class GraphType(metaclass=ABCMeta):
         return self.data
 
     # Wesley
-    def set_data_keys(self, labels, data):
+    def set_data_keys(self, labels, data=None):
         """
-        :param dictionary:
-        :param key_a:
-        :param key_b:
+
+        :param labels:
+        :param data:
         :return:
-        >>> g = Graph()
+         >>> g = Graph()
         >>> g.set_data({"dfd":"asdfds"}, "bar", "C:\\temp\\random.html")
         >>> g.file_type.data = {0: {"1ID": "A23", "Gender": "Male", "Age": 22, "Sales": 245, "BMI": "normal", "salary": 20, "Birthday": "24/06/1995"}, 1: {"IhD": "A2f3", "Gender": "Female", "Age": 22, "Sales": 245, "BMI": "normal", "salary": 20, "Birthday": "24/06/1995"}}
         >>> g.file_type.set_data_keys("Gender", "Sales")
