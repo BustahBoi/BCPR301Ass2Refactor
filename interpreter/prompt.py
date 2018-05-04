@@ -18,10 +18,6 @@ class Shell(Cmd):
         self.file = None
         self.directory = path.realpath(path.curdir)
 
-    def set_remote(self, host, user, password, db):
-        self.db_handler.set_remote(host, user, password, db)
-        self.db_handler.insert_remote_dict(self.data)
-
     def get_remote(self):
         self.data = self.db_handler.get_remote()
 
@@ -108,7 +104,8 @@ class Shell(Cmd):
                     user = input("What is the username? >")
                     password = input("Input a password >")
                     db = input("What is the database name? >")
-                    self.set_remote(host, user, password, db)
+                    self.db_handler.set_remote(host, user, password, db)
+                    self.db_handler.insert_remote_dict(self.data)
                     self.get_remote()
                     if self.data:
                         print("Data has been loaded")
@@ -220,7 +217,8 @@ class Shell(Cmd):
                     user = input("What is the username? >")
                     password = input("Input a password >")
                     db = input("What is the database name? >")
-                    self.set_remote(host, user, password, db)
+                    self.db_handler.set_remote(host, user, password, db)
+                    self.db_handler.insert_remote_dict(self.data)
                 else:
                     print("invalid database type")
             except ValueError:
