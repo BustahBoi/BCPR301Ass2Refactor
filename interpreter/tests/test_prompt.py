@@ -22,7 +22,7 @@ class TestPrompt(TestCase):
     def test_load_xlsx(self):
         expected = type(FileTypeXLSX)
         self.shell.do_load("../Saves/data.xlsx")
-        actual = type(self.shell.controller.filehandler.file_type)
+        actual = type(self.shell.filehandler.file_type)
         self.assertIsInstance(actual, expected)
 
     def test_load_path(self):
@@ -104,7 +104,7 @@ class TestPrompt(TestCase):
                   call('result'),
                   call("Data has been loaded")]
         thing.assert_has_calls(a_call)
-        self.shell.controller.db_handler.drop_remote_table()
+        self.shell.db_handler.drop_remote_table()
 
     def test_save_data_to_db(self):
         user_input = ['localTest']
@@ -178,13 +178,15 @@ class TestPrompt(TestCase):
         self.assertTrue(os.path.isfile("testDoGraph.html"))
 
     def test_cd_sub(self):
-        expected = "C:\\Users\\wew248\\OneDrive\\Course\\2018\\Semester 1\\BCPR301 - Advanced Programming\\Assignment 2\\changed\\interpreter"
+        expected = "D:\\Onedrive\\Course\\2018\\Semester 1\\BCPR301 - Advanced Progra" \
+                   "mming\\Assignment 2\\GitKraken\\BCPR301Ass2Refactor\\interpreter"
         self.shell.do_cd("..")
         actual = self.shell.directory
         self.assertEqual(expected, actual)
 
     def test_cd_sub_sub(self):
-        expected = "C:\\Users\\wew248\\OneDrive\\Course\\2018\\Semester 1\\BCPR301 - Advanced Programming\\Assignment 2\\changed"
+        expected = "D:\\Onedrive\\Course\\2018\\Semester 1\\BCPR301 - Advanced Programming\\Assign" \
+                   "ment 2\\GitKraken\\BCPR301Ass2Refactor"
         self.shell.do_cd("..")
         self.shell.do_cd("..")
         actual = self.shell.directory
@@ -205,7 +207,8 @@ class TestPrompt(TestCase):
     def test_pwd(self):
         with patch("builtins.print") as thing:
             self.shell.do_pwd("")
-        a_call = [call("C:\\Users\\wew248\\OneDrive\\Course\\2018\\Semester 1\\BCPR301 - Advanced Programming\\Assignment 2\\changed\\interpreter")]
+        a_call = [call("D:\\Onedrive\\Course\\2018\\Semester 1\\BCPR301 - Advanced Progra"
+                       "mming\\Assignment 2\\GitKraken\\BCPR301Ass2Refactor\\interpreter")]
         thing.assert_has_calls(a_call)
 
     def test_quit(self):

@@ -67,6 +67,9 @@ class Shell(Cmd):
     def set_keys(self, key_1, key_2=None):
         self.graph.set_keys(key_1, key_2)
 
+    def draw(self, x, y, title):
+        self.graph.draw(x, y, title)
+
     # Wesley
     def do_cd(self, arg):
         """
@@ -194,9 +197,9 @@ class Shell(Cmd):
                         self.set_keys(a_key[0])
                     title = input("What is the title? >")
                     if len(a_key) > 1:
-                        self.controller.draw(a_key[0], a_key[1], title)
+                        self.draw(a_key[0], a_key[1], title)
                     else:
-                        self.controller.draw(a_key[0], a_key[0], title)
+                        self.draw(a_key[0], a_key[0], title)
                 else:
                     print("filename is invalid")
             except IndexError:
@@ -246,17 +249,17 @@ class Shell(Cmd):
         :return:
         """
         commands = arg.split(" ")
-        if self.controller.check_data():
+        if self.check_data():
             try:
                 if commands[0].lower() == "local":
                     db_name = input("What would you like to name the database? >")
-                    self.controller.set_local(db_name)
+                    self.set_local(db_name)
                 elif commands[0].lower() == "remote":
                     host = input("What is the hostname? >")
                     user = input("What is the username? >")
                     password = input("Input a password >")
                     db = input("What is the database name? >")
-                    self.controller.set_remote(host, user, password, db)
+                    self.set_remote(host, user, password, db)
                 else:
                     print("invalid database type")
             except ValueError:
