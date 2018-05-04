@@ -14,15 +14,6 @@ class Controller:
         self.filehandler = None
         self.graph = None
 
-    def validate(self):
-        """
-        Read selected file
-        """
-        # James' changes (13/03)
-        result = self.filehandler.read()
-        self.data = result
-        # print(result)
-
     def set_local(self, connection):
         """
         Set the local database with a specified name

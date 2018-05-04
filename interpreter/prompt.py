@@ -33,6 +33,10 @@ class Shell(Cmd):
         else:
             return False  # pragma: no cover
 
+    def validate(self):
+        result = self.filehandler.read()
+        self.data = result
+
     # Wesley
     def do_cd(self, arg):
         """
