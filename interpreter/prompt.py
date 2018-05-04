@@ -18,11 +18,6 @@ class Shell(Cmd):
         self.file = None
         self.directory = path.realpath(path.curdir)
 
-    def check_data(self):
-        if self.data is not None:
-            return True
-        return False
-
     def set_remote(self, host, user, password, db):
         self.db_handler.set_remote(host, user, password, db)
         self.db_handler.insert_remote_dict(self.data)
@@ -104,7 +99,7 @@ class Shell(Cmd):
                     self.db_handler.set_local(db_name)
                     self.db_handler.insert_local_dict(self.data)
                     self.db_handler.get_local()
-                    if self.check_data():
+                    if self.data:
                         print("Data has been loaded")
                     else:
                         print("No data was found")
@@ -115,7 +110,7 @@ class Shell(Cmd):
                     db = input("What is the database name? >")
                     self.set_remote(host, user, password, db)
                     self.get_remote()
-                    if self.check_data():
+                    if self.data:
                         print("Data has been loaded")
                     else:
                         print("No data was found")
@@ -142,7 +137,7 @@ class Shell(Cmd):
             The graph
         """
         commands = arg.split(" ")
-        if self.check_data():
+        if self.data:
             try:
                 if commands[0] == "pie" or commands[0] == "scatter" or commands[0] == "bar":
                     a_path = path.join(self.directory, commands[1] + ".html")
@@ -214,7 +209,7 @@ class Shell(Cmd):
         :return:
         """
         commands = arg.split(" ")
-        if self.check_data():
+        if self.data:
             try:
                 if commands[0].lower() == "local":
                     db_name = input("What would you like to name the database? >")
