@@ -18,9 +18,6 @@ class Shell(Cmd):
         self.file = None
         self.directory = path.realpath(path.curdir)
 
-    def draw(self, x, y, title):
-        self.graph.draw(x, y, title)
-
     # Wesley
     def do_cd(self, arg):
         """
@@ -142,9 +139,9 @@ class Shell(Cmd):
                         self.graph.set_keys(a_key[0])
                     title = input("What is the title? >")
                     if len(a_key) > 1:
-                        self.draw(a_key[0], a_key[1], title)
+                        self.graph.draw(a_key[0], a_key[1], title)
                     else:
-                        self.draw(a_key[0], a_key[0], title)
+                        self.graph.draw(a_key[0], a_key[0], title)
                 else:
                     print("filename is invalid")
             except IndexError:

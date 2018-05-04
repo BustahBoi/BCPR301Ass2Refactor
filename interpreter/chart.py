@@ -36,7 +36,7 @@ class GraphType(metaclass=ABCMeta):
         return self.data
 
     # Wesley
-    def set_data_keys(self, labels, data=None):
+    def set_data_keys(self, labels, data):
         """
 
         :param labels:
@@ -123,7 +123,7 @@ class Graph:
         self.graph_type.set_criteria(criteria_1, criteria_2)
 
     # Wesley
-    def set_keys(self, key_1, key_2):
+    def set_keys(self, key_1, key_2=None):
         self.graph_type.set_data_keys(key_1, key_2)
 
     # Wesley
