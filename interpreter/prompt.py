@@ -1,7 +1,9 @@
 from cmd import Cmd
 from interpreter.controller import Controller
-from os import path, chdir, getcwd
-from re import match
+from interpreter.database_handler import DatabaseHandler
+from interpreter.filehandler import FileHandler
+from interpreter.chart import Graph
+from os import path
 
 
 # James
@@ -14,6 +16,10 @@ class Shell(Cmd):
     def __init__(self):
         super().__init__()
         self.controller = Controller()
+        self.db_handler = DatabaseHandler()
+        self.data = None
+        self.filehandler = None
+        self.graph = None
         self.intro = "Welcome to our custom Interpreter shell. Type help or ? to list commands.\n"
         self.prompt = '(Interpreter) '
         self.file = None
