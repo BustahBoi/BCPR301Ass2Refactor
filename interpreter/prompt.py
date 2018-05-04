@@ -56,6 +56,11 @@ class Shell(Cmd):
     def get_remote(self):
         self.data = self.db_handler.get_remote()
 
+    def set_graph(self, graph_type, filename):
+        self.graph = Graph()
+        data = self.data
+        self.graph.set_data(data, graph_type, filename)
+
     # Wesley
     def do_cd(self, arg):
         """
@@ -166,7 +171,7 @@ class Shell(Cmd):
             try:
                 if commands[0] == "pie" or commands[0] == "scatter" or commands[0] == "bar":
                     a_path = path.join(self.directory, commands[1] + ".html")
-                    self.controller.set_graph(commands[0], a_path)
+                    self.set_graph(commands[0], a_path)
                     criteria = input("What are the criteria? ([key] [value - optional]) > ")
                     crit = criteria.split(" ")
                     print("_______________")

@@ -14,11 +14,6 @@ class Controller:
         self.filehandler = None
         self.graph = None
 
-    def set_graph(self, graph_type, filename):
-        self.graph = Graph()
-        data = self.data
-        self.graph.set_data(data, graph_type, filename)
-
     def set_criteria(self, criteria_1, criteria_2=None):
         self.graph.set_criteria(criteria_1, criteria_2)
 
