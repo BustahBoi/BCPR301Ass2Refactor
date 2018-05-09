@@ -28,7 +28,8 @@ class Validator:
 
     def change_regexp(self, attr, data):
         result = False
-        formatting = {"gender": {"((m|M)ale)$": "M", "((f|F)emale)$": "F"}}
+        formatting = {"gender": {"((m|M)ale)$": "M", "((f|F)emale)$": "F"},
+                      "bmi": {"^(normal|overweight|obesity|underweight)$": data.capitalize()}}
         try:
             new_format = formatting[attr.lower()]
             for key, value in new_format.items():
@@ -123,7 +124,7 @@ class Validator:
                     result = False
                     return result
                 else:
-                    a.push_value(key, a.check_BMI(value))
+                    a.push_value(key, a.check("BMI", value))
             elif key == "Salary":
                 if value is None or a.check("Salary", value) is False:
                     result = False
