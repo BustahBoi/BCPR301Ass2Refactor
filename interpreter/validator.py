@@ -23,7 +23,7 @@ class Validator:
             if match:
                 result = data
             else:
-                result = self.change_regexp(attr, data)
+                result = self.change_regexp(attr.lower(), data)
         return result
 
     def change_regexp(self, attr, data):
@@ -32,11 +32,11 @@ class Validator:
                       "bmi": {"^(normal|overweight|obesity|underweight)$": data.capitalize()},
                       "birthday": {"(/|\\|.|:|;|,|_)": "/\\.:;,_"}}
         try:
-            new_format = formatting[attr.lower()]
+            new_format = formatting[attr]
             for key, value in new_format.items():
-                if attr == "birthday" and re.search(key, data):
-                    for c in value:
-                        result = data.replace(c, '-')
+                c = re.compile(key)
+                if attr == "birthday" and c.search(data) is not None:
+                    result = c.sub('-', data)
                 elif re.match(key, data) is not None:
                     result = value
                     break
@@ -49,21 +49,6 @@ class Validator:
     @staticmethod
     def xlsx_date(a_date):
         return a_date.date().strftime("%d-%m-%Y")
-
-    def check_birthday(self, new_birthday):
-        checked = self.check("Birthday", new_birthday)
-        if checked:
-            return checked
-        else:
-            invalid_delims = "(/|\\|.|:|;|,|_)"
-            match = re.search(invalid_delims, new_birthday)
-            if match:
-                invalid = "/\\.:;,_"
-                for c in invalid:
-                    new_birthday = new_birthday.replace(c, '-')
-            else:
-                new_birthday = False
-            return new_birthday
 
     @staticmethod
     def checker(row):
@@ -117,7 +102,7 @@ class Validator:
                     result = False
                     return result
                 else:
-                    a.push_value(key, a.check_birthday(value))
+                    a.push_value(key, a.check("Birthday", value))
         # except TypeError:
         #     print("Sorry, there was a type error for a record value")
 
