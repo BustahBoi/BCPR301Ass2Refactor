@@ -42,29 +42,6 @@ class Validator:
         except KeyError:
             return False
 
-    def check_BMI(self, new_BMI):
-        """
-        Checks the BMI matches validation rules
-        :param new_BMI:
-        :return:
-        # Wesley
-        >>> v = Validator()
-        >>> v.check_BMI("normal")
-        'Normal'
-        """
-        checked = self.check("BMI", new_BMI)
-        if checked:
-            return checked
-        else:
-            # James (new reg ex)
-            match = re.match("^(normal|overweight|obesity|underweight)$", new_BMI)
-            if match:
-                new_BMI = new_BMI.capitalize()
-                return new_BMI
-            new_BMI = False
-            # print("false new_BMI")
-            return new_BMI
-
     @staticmethod
     def xlsx_date(a_date):
         return a_date.date().strftime("%d-%m-%Y")
