@@ -41,33 +41,6 @@ class Validator:
         except KeyError:
             return False
 
-    def check_gender(self, new_gender):
-        """
-        Checks the gender matches validation rules
-        :param new_gender:
-        :return:
-        # Wesley
-        >>> v = Validator()
-        >>> v.check_gender("M")
-        'M'
-        """
-        checked = self.check("Gender", new_gender)
-        if checked:
-            return checked
-        else:
-            # James (new reg ex)
-            match = re.match("^((m|M)ale)$", new_gender)
-            if match:
-                new_gender = "M"
-                return new_gender
-            fmatch = re.match("^((f|F)emale)$", new_gender)
-            if fmatch:
-                new_gender = "F"
-                return new_gender
-            new_gender = False
-            # print("false new_gender")
-            return new_gender
-
     def check_BMI(self, new_BMI):
         """
         Checks the BMI matches validation rules
