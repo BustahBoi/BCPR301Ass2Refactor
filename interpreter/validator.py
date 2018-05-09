@@ -17,12 +17,29 @@ class Validator:
     def check(self, attr, data):
         check_attr = getattr(self, attr.lower(), False)
         data = str(data)
+        result = False
         if check_attr:
             match = re.match(check_attr, data)
             if match:
-                return data
+                result = data
             else:
-                return False
+                result = self.change_regexp(attr, data)
+        return result
+
+    def change_regexp(self, attr, data):
+        result = False
+        formatting = {"gender": {"((m|M)ale)$": "M", "((f|F)emale)$": "F"}}
+        try:
+            new_format = formatting[attr.lower()]
+            for key, value in new_format.items():
+                if re.match(key, data) is not None:
+                    result = value
+                    break
+                else:
+                    result = False
+            return result
+        except KeyError:
+            return False
 
     def check_gender(self, new_gender):
         """
@@ -109,11 +126,11 @@ class Validator:
                     print("TypeError")
             elif key == "Gender":
                 try:
-                    if value is None or a.check_gender(value) is False:
+                    if value is None or a.check("Gender", value) is False:
                         result = False
                         return result
                     else:
-                        a.push_value(key, a.check_gender(value))
+                        a.push_value(key, a.check("Gender", value))
                 except TypeError:
                     print("TypeError")
             elif key == "Age":
