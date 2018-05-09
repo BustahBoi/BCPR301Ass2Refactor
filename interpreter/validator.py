@@ -53,60 +53,12 @@ class Validator:
     @staticmethod
     def checker(row):
         result = True
-        # try:
         for key, value in row.items():
-            if key == "ID":
-                try:
-                    if value is None or a.check("ID", value) is False:
-                        result = False
-                        return result
-                    else:
-                        a.push_value(key, a.check("ID", value))
-                except TypeError:
-                    print("TypeError")
-            elif key == "Gender":
-                try:
-                    if value is None or a.check("Gender", value) is False:
-                        result = False
-                        return result
-                    else:
-                        a.push_value(key, a.check("Gender", value))
-                except TypeError:
-                    print("TypeError")
-            elif key == "Age":
-                if value is None or a.check("Age", value) is False:
-                    result = False
-                    return result
-                else:
-                    a.push_value(key, a.check("Age", value))
-            elif key == "Sales":
-                if value is None or a.check("Sales", value) is False:
-                    result = False
-                    return result
-                else:
-                    a.push_value(key, a.check("Sales", value))
-            elif key == "BMI":
-                if value is None or a.check("BMI", value) is False:
-                    result = False
-                    return result
-                else:
-                    a.push_value(key, a.check("BMI", value))
-            elif key == "Salary":
-                if value is None or a.check("Salary", value) is False:
-                    result = False
-                    return result
-                else:
-                    a.push_value(key, a.check("Salary", value))
-            elif key == "Birthday":
-                if value is None or a.check("Birthday", value) is False:
-                    result = False
-                    return result
-                else:
-                    a.push_value(key, a.check("Birthday", value))
-        # except TypeError:
-        #     print("Sorry, there was a type error for a record value")
+            result = a.check(key, value)
+            if result:
+                a.push_value(key, result)
+        return result
 
-    # James' changes (13/03)
     @staticmethod
     def save_dict(loaded_dict):
         for empno, row in loaded_dict.items():
@@ -123,9 +75,7 @@ class Validator:
     def push_row(self, empno):
         temp = deepcopy(self.temp_dict)
         if len(temp) == 7:
-            # print("Adding Row " + str(empno))
             self.valid_dict[empno] = temp
-            # print(self.valid_dict[empno])
         self.temp_dict = dict()
 
     def return_dict(self):
