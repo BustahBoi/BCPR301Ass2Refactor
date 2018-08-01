@@ -1,4 +1,7 @@
 # BCPR301Ass2Refactor
-Refactoring Assignment 1
+Python Assignment 2 - Refactoring
 
-Do the thing for the thing that i have to do for the thing
+Refactoring previous assignment, removing code smells - https://refactoring.guru/refactoring/smells
+
+Team Guido Assignment
+
